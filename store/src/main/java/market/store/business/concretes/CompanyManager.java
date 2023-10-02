@@ -11,6 +11,7 @@ import market.store.business.requests.companyRequests.AddCompanyRequest;
 import market.store.business.requests.companyRequests.UpdateCompanyRequest;
 import market.store.business.responses.companyResponses.GetAllCompanyResponse;
 import market.store.business.responses.companyResponses.GetCompanyResponse;
+import market.store.business.rules.AccountBusinessRules;
 import market.store.core.utitilies.mappers.ModelMapperService;
 import market.store.dataAccess.abstracts.CompanyRepository;
 import market.store.entities.concretes.Company;
@@ -21,6 +22,7 @@ public class CompanyManager implements CompanyService {
 
 	private CompanyRepository companyRepository;
 	private ModelMapperService modelMapperService;
+	private AccountBusinessRules accountBusinessRules;
 	
 	@Override
 	public List<GetAllCompanyResponse> getAll() {
@@ -49,6 +51,10 @@ public class CompanyManager implements CompanyService {
 
 	@Override
 	public void add(AddCompanyRequest addCompanyRequest) {
+		
+		
+		accountBusinessRules.existsAccountByEmail(addCompanyRequest.getAccountEmail());
+		accountBusinessRules.checkPasswordFields(addCompanyRequest.getAccountPassword(), addCompanyRequest.getConfirmPassword());
 		
 		Company company = modelMapperService.forRequest().map(addCompanyRequest, Company.class);
 		

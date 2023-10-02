@@ -11,6 +11,7 @@ import market.store.business.requests.customerRequests.AddCustomerRequest;
 import market.store.business.requests.customerRequests.UpdateCustomerRequest;
 import market.store.business.responses.customerResponses.GetAllCustomerResponse;
 import market.store.business.responses.customerResponses.GetCustomerResponse;
+import market.store.business.rules.AccountBusinessRules;
 import market.store.core.utitilies.mappers.ModelMapperService;
 import market.store.dataAccess.abstracts.CustomerRepository;
 import market.store.entities.concretes.Customer;
@@ -21,6 +22,7 @@ public class CustomerManager implements CustomerService {
 	
 	private CustomerRepository customerRepository;
 	private ModelMapperService modelMapperService;
+	private AccountBusinessRules accountBusinessRules;
 
 	@Override
 	public List<GetAllCustomerResponse> getAll() {
@@ -53,6 +55,9 @@ public class CustomerManager implements CustomerService {
 	@Override
 	public void add(AddCustomerRequest addCustomerRequest) {
 
+		accountBusinessRules.existsAccountByEmail(addCustomerRequest.getAccountAddress());
+		accountBusinessRules.checkPasswordFields(addCustomerRequest.getAccountPassword(), addCustomerRequest.getAccountConfirmPassword());
+		
 		Customer customer = modelMapperService.forRequest().map(addCustomerRequest, Customer.class);
 		customer.setId(0);
 		

@@ -12,14 +12,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import market.store.entities.concretes.Company;
 import market.store.entities.concretes.Customer;
-import market.store.entities.concretes.ProfilePhoto;
+import market.store.entities.concretes.photos.ProfilePhoto;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name="accounts")
-public class Account {
+public class Account { 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +45,6 @@ public class Account {
 	private Company company;
 	
 	@OneToOne(mappedBy = "account")
-	private ProfilePhoto photo;
+	private ProfilePhoto profilePhoto;
 
 }

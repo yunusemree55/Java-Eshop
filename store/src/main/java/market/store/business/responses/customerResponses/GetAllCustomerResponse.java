@@ -16,5 +16,6 @@ public class GetAllCustomerResponse {
 	private String address;
 	private String phoneNumber;
 	private String url;
+	
  
 }

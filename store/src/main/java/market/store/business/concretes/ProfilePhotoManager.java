@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import market.store.business.abstracts.ProfilePhotoService;
-import market.store.business.requests.photoRequests.AddProfilePhotoRequest;
+import market.store.business.requests.photoRequests.profilePhotoRequests.AddProfilePhotoRequest;
 import market.store.core.cloudinary.CloudinaryService;
 import market.store.core.utitilies.mappers.ModelMapperService;
 import market.store.dataAccess.abstracts.ProfilePhotoRepository;
-import market.store.entities.concretes.ProfilePhoto;
+import market.store.entities.concretes.photos.ProfilePhoto;
 
 @Service
 @AllArgsConstructor
@@ -28,8 +28,7 @@ public class ProfilePhotoManager implements ProfilePhotoService {
 		
 		try {
 			
-			photo.setUrl(cloudinaryService.uploadFile(addProfilePhotoRequest.getPhoto()));
-			
+			photo.setUrl(cloudinaryService.uploadFile(addProfilePhotoRequest.getUrl()));
 			
 			photoRepository.save(photo);
 			

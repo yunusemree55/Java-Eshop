@@ -1,8 +1,11 @@
 package market.store.business.responses.companyResponses;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import market.store.business.responses.productResponses.GetProductResponse;
 
 @Data
 @AllArgsConstructor
@@ -16,5 +19,6 @@ public class GetAllCompanyResponse {
 	private String address;
 	private String phoneNumber;
 	private String url;
+	private List<GetProductResponse> products;
 
 }

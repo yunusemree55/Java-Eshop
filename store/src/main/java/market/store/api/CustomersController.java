@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import market.store.business.abstracts.CustomerService;
 import market.store.business.requests.customerRequests.AddCustomerRequest;
@@ -41,7 +42,7 @@ public class CustomersController {
 	
 	@PostMapping("/add")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public void add(@RequestBody AddCustomerRequest addCustomerRequest) {
+	public void add(@RequestBody @Valid AddCustomerRequest addCustomerRequest) {
 		
 		customerService.add(addCustomerRequest);
 	}

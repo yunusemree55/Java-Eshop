@@ -1,6 +1,5 @@
-package market.store.entities.concretes;
+package market.store.entities.concretes.photos;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,22 +17,19 @@ import market.store.entities.abstracts.Account;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="customers")
-public class Customer{
-	
+@Table(name="profilePhotos")
+public class ProfilePhoto {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="firstName")
-	private String firstName;
+	@Column(name="url")
+	private String url;
 	
-	@Column(name="lastName")
-	private String lastName;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="accountId")
+	@OneToOne()
+	@JoinColumn(name = "accountId")
 	private Account account;
-
+	
 }

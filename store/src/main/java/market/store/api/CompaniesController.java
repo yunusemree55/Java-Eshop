@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import market.store.business.abstracts.CompanyService;
 import market.store.business.requests.companyRequests.AddCompanyRequest;
@@ -42,7 +43,7 @@ public class CompaniesController {
 	
 	@PostMapping("/add")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public void add(@RequestBody AddCompanyRequest addCompanyRequest) {
+	public void add(@RequestBody @Valid AddCompanyRequest addCompanyRequest) {
 		
 		companyService.add(addCompanyRequest);
 		

@@ -9,37 +9,45 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import market.store.entities.abstracts.Account;
+import market.store.entities.concretes.photos.ProductPhoto;
 
 @Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="companies")
-public class Company {
-	
+@Table(name="products")
+public class Product {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="companyName")
-	private String companyName;
+	@Column(name="name")
+	private String name;
 	
-	@Column(name="description")
-	private String description;
+	@Column(name="unitPrice")
+	private double unitPrice;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="accountId")
-	private Account account;
+	@Column(name="unitsInStock")
+	private int unitsInStock;
 	
-	@OneToMany(mappedBy = "company",cascade = CascadeType.ALL)
-	private List<Product> products;
-
+	@ManyToOne()
+	@JoinColumn(name="companyId")
+	private Company company;
+	
+	@OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+	private List<ProductPhoto> productPhotos;
+	
+	@ManyToOne()
+	@JoinColumn(name = "categoryId")
+	private Category category;
+	
+	
 }
